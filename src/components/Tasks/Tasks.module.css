@@ -1,0 +1,127 @@
+.project {
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--c);
+  border-radius: 8px;
+  background: var(--bg);
+  padding: 8px 12px 10px;
+}
+
+.archived {
+  opacity: 0.55;
+}
+
+.project header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.project h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: default;
+}
+
+.swatch {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--c);
+}
+
+.tasks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tasks li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 28px;
+}
+
+.bullet {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  border: 1.5px solid var(--text-muted);
+  border-radius: 50%;
+  background: none;
+}
+
+.bullet:hover {
+  border-color: var(--c);
+}
+
+.done .bullet {
+  border-color: var(--c);
+  background: var(--c);
+}
+
+.tasks input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: none;
+  padding: 2px 0;
+  outline: none;
+}
+
+.tasks input:focus {
+  border-bottom: 1px solid var(--border);
+}
+
+.done input {
+  color: var(--text-faint);
+  text-decoration: line-through;
+}
+
+.due {
+  color: var(--date);
+  font-size: 11px;
+}
+
+.none button {
+  border: none;
+  background: none;
+  padding: 0;
+  color: var(--text-faint);
+  font-size: 12px;
+}
+
+.none button:hover {
+  color: var(--accent);
+}
+
+.note {
+  margin-top: 6px;
+}
+
+.note input {
+  width: 100%;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: none;
+  padding: 3px 8px;
+  font-size: 12px;
+  color: var(--text);
+}
+
+.note input:focus {
+  outline: none;
+  border-color: var(--c);
+}
+
+.name {
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--bg-2);
+  padding: 2px 8px;
+  font-size: 13px;
+  min-height: 26px;
+}

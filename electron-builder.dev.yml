@@ -1,0 +1,10 @@
+# LogtrackerDev, the preview build of the dev branch (pnpm preview, scripts/preview.ts): the release config under
+# its own app id and name, unpacked only (no installer) and not published. The version comes from the command line.
+extends: ./electron-builder.yml
+appId: com.logtracker.dev
+productName: LogtrackerDev
+extraMetadata:
+  productName: LogtrackerDev
+directories:
+  output: release-dev
+publish: null

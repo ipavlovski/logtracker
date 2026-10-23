@@ -1,0 +1,64 @@
+.upload {
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: var(--radius);
+  padding: 2px 10px;
+  min-height: 26px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.upload:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+.search {
+  min-width: 280px;
+}
+
+.channel {
+  display: inline-block;
+  min-width: 6em;
+  padding: 0 6px;
+  border-radius: 3px;
+  font-size: 11px;
+  background: var(--surface-2);
+  text-align: center;
+}
+
+.email {
+  color: #6d9df0;
+}
+
+.sms {
+  color: #5fb878;
+}
+
+.call {
+  color: #d9a25f;
+}
+
+.whatsapp {
+  color: #7fb4ad;
+}
+
+.who {
+  white-space: nowrap;
+  max-width: 22em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.del {
+  border: none;
+  background: none;
+  color: var(--text-faint);
+  padding: 0 4px;
+}
+
+.del:hover {
+  color: var(--danger);
+}
