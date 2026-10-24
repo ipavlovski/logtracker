@@ -1,4 +1,4 @@
-/* The Settings window: a section list on the left, the section's settings on the right (laid out like Updates). */
+/* The Settings window: one scrolling column of setting groups. */
 
 .window {
   width: min(780px, 100%);
@@ -38,49 +38,13 @@
 .body {
   flex: 1;
   min-height: 0;
-  display: grid;
-  grid-template-columns: 180px 1fr;
-}
-
-.nav {
-  overflow-y: auto;
-  padding: 8px;
-  border-right: 1px solid var(--border);
-  background: var(--bg-2);
-}
-
-.nav button {
-  position: relative;
-  display: block;
-  width: 100%;
-  padding: 8px 12px;
-  border: 0;
-  border-radius: var(--radius);
-  background: none;
-  color: var(--text);
-  text-align: left;
-  font: inherit;
-  font-size: 13px;
-}
-
-.nav button:hover,
-.nav button.selected {
-  background: var(--surface-2);
-}
-
-/* The selected section's accent bar, as in the Updates window. */
-.nav button.selected::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 8px;
-  bottom: 8px;
-  width: 3px;
-  border-radius: 2px;
-  background: var(--accent);
+  display: flex;
+  flex-direction: column;
 }
 
 .content {
+  flex: 1;
+  min-height: 0;
   overflow-y: auto;
   padding: 22px 32px 32px;
 }
@@ -107,6 +71,11 @@
   padding: 10px 0;
   border-bottom: 1px solid var(--border);
   font-size: 13px;
+}
+
+.row > div:first-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 label.row {
