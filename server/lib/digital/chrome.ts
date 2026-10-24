@@ -112,13 +112,35 @@ function doScan(files: HistoryFile[]): ScanReport {
   return report
 }
 
+/** Drops visits that look the same as a newer one kept in the same minute: same title and host (reloads, in-app
+ *  navigation). Expects visits newest first. */
+export function collapseRepeats(visits: WebVisitDTO[]): WebVisitDTO[] {
+  const seen = new Set<string>()
+  return visits.filter((v) => {
+    const key = `${Math.floor(v.at / 60_000)}|${v.title}|${hostOf(v.url)}`
+    if (seen.has(key)) return false
+    seen.add(key)
+    return true
+  })
+}
+
+const hostOf = (url: string) => {
+  try {
+    return new URL(url).host
+  } catch {
+    return url
+  }
+}
+
 export function listVisits(from: number, to: number, q?: string, limit = 2000): WebVisitDTO[] {
   const text = q ? `%${q}%` : undefined
-  return db
+  return collapseRepeats(
+    db
     .select({ id: webVisits.id, at: webVisits.at, title: webVisits.title, url: webVisits.url, profile: webVisits.profile })
     .from(webVisits)
     .where(and(gte(webVisits.at, from), lt(webVisits.at, to), text ? or(like(webVisits.title, text), like(webVisits.url, text)) : undefined))
-    .orderBy(desc(webVisits.at))
-    .limit(limit)
-    .all()
+      .orderBy(desc(webVisits.at))
+      .limit(limit)
+      .all(),
+  )
 }

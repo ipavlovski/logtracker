@@ -177,6 +177,20 @@ describe('digital activity', () => {
     expect((await req<{ watches: YtWatchDTO[] }>('GET', `/api/digital/youtube/watches?${range}`)).watches.map((w) => w.channel)).toEqual(['Rick Astley'])
   })
 
+  it('shows visits that look the same within a minute once', async () => {
+    const { collapseRepeats } = await import('./lib/digital/chrome.ts')
+    const t = Date.parse('2026-10-22T20:57:00Z')
+    const v = (id: number, at: number, title: string, url: string): WebVisitDTO => ({ id, at, title, url, profile: 'ip/Default' })
+    const visits = [
+      v(1, t + 50_000, 'Library', 'http://localhost:5173/b'),
+      v(2, t + 20_000, 'Library', 'http://localhost:5173/a'),
+      v(3, t + 10_000, 'Library', 'http://localhost:5174/'),
+      v(4, t + 5_000, 'Other', 'http://localhost:5173/'),
+      v(5, t - 1_000, 'Library', 'http://localhost:5173/'),
+    ]
+    expect(collapseRepeats(visits).map((x) => x.id)).toEqual([1, 3, 4, 5])
+  })
+
   it('fills in missing channels from oEmbed', async () => {
     const { db } = await import('./db/client.ts')
     const { ytWatches } = await import('./db/schema.ts')
